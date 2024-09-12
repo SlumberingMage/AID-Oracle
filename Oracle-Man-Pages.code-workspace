@@ -1,0 +1,30 @@
+/* Pseudocode scratch page for /Oracle Text Reader
+
+
+
+Example user input into AiD- "\Oracle, how do I check my inventory?"
+   
+
+
+
+
+initial function OracleInvoker----->  function inputParser     onInput(user input) {
+                    - parse out anything before "\Oracle" in user input and save as temp object, possibly adding punctuation etc as needed
+                    - return "" // "hello" etc placeholder to AiD for model context construction
+                    - send \Oracle temp object as pseudouser input for man page AI query
+                    - take return from pseudouser input and
+                        onOutput(response to placeholder) {
+                            - remove AiD response to placeholder input
+                            - insert man page AI query return from pseudouser input
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+*/
