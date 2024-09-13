@@ -34,20 +34,34 @@ initial function OracleInvoker----->
 
 
 
+ // - parse out anything before "/Oracle" in user input and save as temp object, possibly adding punctuation etc as needed
 
+
+                            // Runs on every user input into AID
          function inputParser     onInput(text) {
-                    - parse out anything before "/Oracle" in user input and save as temp object, possibly adding punctuation etc as needed
+                  
                            // syntactic sugar needed- function hash(text){} instead?
                         const hash = (text) => {
+
+                           // triggers if user input contains "/Oracle"
                               if (text.match(/Oracle)){ 
-                                 text.trim
 
-
-
-
-
+                                  // cuts user input down to only post-/Oracle user input
+                                  function trimmer(text){
+                                  trimmertext = text.trim
+                                  return {text}
+                                   }
+                                  //sends trimmed Oracle command to MPAI
+                                  POST trimmertext (MPAI)
+                                  // Tells AID a lorem ipsum placeholder
+                                  return ("You sit quietly for one minute and think of nothing."
+                                  // replaces AID output with MPAI output and sends it to user
+                                  onOutput(text){
+                                      text = GET (MPAI)
+                                    }
                                  }
-                              return {text}
+                            
+                              break
 
                            // return here is solely /Oracle input- hash.return needs to be sent to Man Page AI as input query, eg "how do I check my inventory?
                               }
