@@ -109,7 +109,8 @@ test to replace user input (text) with desired, and ai output(text in onOutput) 
  // to-do: differentiate texts in onInput and onOutput sections? not necessary because text is a contexually defined parameter in the hooks themselves?
 
 function replaceTest onInput(text) {
-      // logs real input from user
+   
+     // logs real input from user
       console.log("Actual input = " + text)
       
       // replaces user input with test phrase and logs the new value of text
@@ -121,6 +122,7 @@ function replaceTest onInput(text) {
        console.log("Actual response = " + text)
        text = "It worked!"
        console.log (text)
+
      }
     }
 
