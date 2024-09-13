@@ -51,10 +51,13 @@ initial function OracleInvoker----->
                                   trimmertext = text.trim
                                   return {text}
                                    }
+
                                   //sends trimmed Oracle command to MPAI
                                   POST trimmertext (MPAI)
+
                                   // Tells AID a lorem ipsum placeholder
                                   return ("You sit quietly for one minute and think of nothing."
+
                                   // replaces AID output with MPAI output and sends it to user
                                   onOutput(text){
                                       text = GET (MPAI)
@@ -101,16 +104,23 @@ initial function OracleInvoker----->
 
 
 
-//*
-test to replace user input with desired, and ai output with desired in turn
+/*
+test to replace user input (text) with desired, and ai output(text in onOutput) with desired in turn
+ // to-do: differentiate texts in onInput and onOutput sections? not necessary because text is a contexually defined parameter in the hooks themselves?
 
 function replaceTest onInput(text) {
+      // logs real input from user
       console.log("Actual input = " + text)
+      
+      // replaces user input with test phrase and logs the new value of text
       text = "Test user input."
-      console.log(text)     
+      console.log(text) 
+
+     // logs and replaces AID response with test phrase and logs new value   
      onOutput(text){
        console.log("Actual response = " + text)
        text = "It worked!"
+       console.log (text)
      }
     }
 
