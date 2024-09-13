@@ -7,11 +7,11 @@ MPAI- Man Page AI, hypothetical chatbot for Oracle Manual Pages
 
 function contains hasher, manager, 
 
-*Manager reads user input into AiD and checks for \Oracle command, executing function if command detected
+*Manager reads user input into AiD and checks for /Oracle command, executing function if command detected
 
-Example user input into AiD- "Lorem ipsum we'll make this get a real return later after the basic idea works \Oracle, how do I check my inventory?"
+Example user input into AiD- "Lorem ipsum we'll make this get a real return later after the basic idea works /Oracle, how do I check my inventory?"
 
-*If triggered, hasher parses the sentence and discards anything before "\Oracle", cuts after Oracle and sends results to Man Page AI
+*If triggered, hasher parses the sentence and discards anything before "/Oracle", cuts after Oracle and sends results to Man Page AI
 
 Example hasher output to Man Page- "how do I check my inventory?"
 
@@ -36,10 +36,10 @@ initial function OracleInvoker----->
 
 
          function inputParser     onInput(text) {
-                    - parse out anything before "\Oracle" in user input and save as temp object, possibly adding punctuation etc as needed
+                    - parse out anything before "/Oracle" in user input and save as temp object, possibly adding punctuation etc as needed
                            // syntactic sugar needed- function hash(text){} instead?
                         const hash = (text) => {
-                              if (text.match(\Oracle)){ 
+                              if (text.match(/Oracle)){ 
                                  text.trim
 
 
@@ -49,14 +49,14 @@ initial function OracleInvoker----->
                                  }
                               return {text}
 
-                           // return here is solely \Oracle input- hash.return needs to be sent to Man Page AI as input query, eg "how do I check my inventory?
+                           // return here is solely /Oracle input- hash.return needs to be sent to Man Page AI as input query, eg "how do I check my inventory?
                               }
 
 
 
 
                     - return "" // "hello" etc placeholder to AiD for model context construction
-                    - send \Oracle temp object as pseudouser input for man page AI query
+                    - send /Oracle temp object as pseudouser input for man page AI query
                     - take return from pseudouser input and
                         onOutput(response to placeholder) {
                             - remove AiD response to placeholder input
