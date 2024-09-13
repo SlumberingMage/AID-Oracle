@@ -87,3 +87,36 @@ initial function OracleInvoker----->
 
 
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//*
+test to replace user input with desired, and ai output with desired in turn
+
+function replaceTest onInput(text) {
+      console.log("Actual input = " + text)
+      text = "Test user input."
+      console.log(text)     
+     onOutput(text){
+       console.log("Actual response = " + text)
+       text = "It worked!"
+     }
+    }
+
+
+
+
+
+
+*/
