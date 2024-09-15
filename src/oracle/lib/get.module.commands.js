@@ -10,7 +10,7 @@ const info = {
 // The input structure is: `\n> ${who} /oracle /${module} /${args} ${values}.\n`
 // The args and values are optional, and can be multiple.
 // Example: '\n> You /oracle /try /to jump over the fence /pov-try tried /roll 20 /rolled 12 /threshold 11.\n'
-const commandStart = (who, module) => `\n> ${who} /oracle /${module} /`
+const commandStart = (who, module) => `\n> ${who} /oracle\s+/${module} /`
 
 /**
  * Get the arguments part of the input.
@@ -27,13 +27,21 @@ const getArguments = (input, module, who) => {
  * @param {string} input The input string.
  * @param {string[]} characters The characters to check for.
  * @param {string[]} defaultCharacters The default characters to check for.
- * @returns The name of the character found in the input, or null if not found.
+ * @returns An object of the character found in the input and the players POV as an number 1, 2, 3, or null if not found.
  */
-const getWho = (input, module, characters = [], defaultCharacters = ['You', 'I']) => {
+const getWho = (input, module, names = []) => {
     // Add the default names to the array.
-    const names = [...defaultCharacters, ...characters]
+    if (input.startsWith(commandStart('You', module)))
+        return { name: 'You', pov: 1 }
+    if (input.startsWith(commandStart('I', module)))
+        return { name: 'I', pov: 2 }
     // Check if the input starts with any of the names, if so, return the name
-    return names.find(n => input.startsWith(commandStart(n, module))) ?? null
+    for (let name of names) {
+        if (input.startsWith(commandStart(name, module))) {
+            return { name, pov: 3 }
+        }
+    }
+    return null
 }
 
 /**
