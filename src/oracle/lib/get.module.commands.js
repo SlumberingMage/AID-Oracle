@@ -1,0 +1,109 @@
+// Module contains functions to get the module commands from the input string.
+// It has a requirement for an object in the final script.
+// Do not test the object, only the functions.
+// The following objects are required:
+const info = {
+    characters: ['John', 'Jane'],
+}
+
+// The command start is the string that starts a command.
+// The input structure is: `\n> ${who} /oracle /${module} /${args} ${values}.\n`
+// The args and values are optional, and can be multiple.
+// Example: '\n> You /oracle /try /to jump over the fence /pov-try tried /roll 20 /rolled 12 /threshold 11.\n'
+const commandStart = (who, module) => `\n> ${who} /oracle /${module} /`
+
+/**
+ * Get the arguments part of the input.
+ * @param {string} input The input string.
+ * @param {string} who The name of the character.
+ * @returns The arguments string or null if not found.
+ */
+const getArguments = (input, module, who) => {
+    return input.startsWith(commandStart(who, module)) ? input.substring(commandStart(who, module).length - 1, input.length - 2) : null
+}
+
+/**
+ * Get the name of the character from the input.
+ * @param {string} input The input string.
+ * @param {string[]} characters The characters to check for.
+ * @param {string[]} defaultCharacters The default characters to check for.
+ * @returns The name of the character found in the input, or null if not found.
+ */
+const getWho = (input, module, characters = [], defaultCharacters = ['You', 'I']) => {
+    // Add the default names to the array.
+    const names = [...defaultCharacters, ...characters]
+    // Check if the input starts with any of the names, if so, return the name
+    return names.find(n => input.startsWith(commandStart(n, module))) ?? null
+}
+
+/**
+ * Parses the command string into its components.
+ * @param {string} command The command string.
+ * @param {string[]} names The names of the commands to check for.
+ * @returns An object with the parsed components, or null signalling no command.
+ */
+const parseCommands = (command, names) => {
+    // Get all the commands in the command string.
+    const matches = command.match(/\/\w+-\w+ |\/\w+ /gm)
+    // Check if the command is valid, if not, return null.
+    if (!matches || matches.length <= 1) {
+        return null
+    }
+    // Create an object to store the commands.
+    let commands = {
+        module: matches[0].slice(1, -1),
+        args: []
+    }
+    // Remove the rootCommand from the command string.
+    command = command.replace(matches[0], '')
+    // Check if the command is only a "to" command, if so, add it to the commands and return.
+    if (matches.length === 2) {
+        const regex = new RegExp(`(?<=\/to ).*`)
+        commands.args.push({ key: 'to', value: command.match(regex)[0].trim() })
+        return commands
+    }
+    // Shift and reverse the commands, this is to ensure the last command is always the target.
+    matches.shift().reverse().forEach(match => {
+        // Get the name of the command, and form the regex to match the command.
+        const regex = new RegExp(`(?<=${match} ).*`)
+        // Check if the command is in the names array, if so, add it to the commands
+        if (names.includes(match)) {
+            // Add the command to the commands object, trim the command to remove any leading or trailing spaces.
+            commands.args.push({ key: match, value: command.match(regex)[0].trim() })
+            // Create a regex to remove the command from the command string.
+            const regexReplace = new RegExp(`/${match} ${commands[match]}`)
+            // Remove the command from the command string.
+            command = command.replace(regexReplace, '')
+        }
+    })
+    // Not enough commands, input was invalid, return null for safe handling.
+    if (commands.args.length < 1) {
+        return null
+    }
+    // Return the commands object, they SHOULD contain the base, to, and other commands as needed.
+    return commands
+}
+
+/**
+ * Get the module commands from the input.
+ * @param {string} input The input string.
+ * @returns The module commands or null if not found.
+ */
+const getModuleCommands = (input, module, commandNames = []) => {
+    // Get the who from the input.
+    const who = getWho(input, module, info.characters)
+    // If no valid who is found, return null.
+    if (!who) return null
+    // Get the command string from the input.
+    const commandStr = getArguments(input, module, who)
+    // If no valid command is found, return null.
+    if (!commandStr) return null
+    const args = parseCommands(commandStr, commandNames)
+    // Check if the commands are valid.
+    // If no valid commands are found, return null.
+    if (!args) return null
+    // The parsed commands SHOULD be valid.
+    return { who, module, args }
+}
+
+module.exports = { commandStart, getCommand: getArguments, getWho, parseCommands, getModuleCommands }

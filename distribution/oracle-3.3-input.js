@@ -1011,9 +1011,14 @@ const modifier = (text) => {
             return success;
         }
 
-        const delphicBase = () => {
+        /**
+         * Sets the initial state of the game.
+         * @param {Boolean} refresh If the game state should be restored to it's default state.
+         * @returns {void}
+        */
+        const delphicBase = (refresh) => {
             // Set the default game state
-            if (!state.game) {
+            if (refresh || !state.game) {
                 state.game = new Game(defaultGame);
             }
             // Ensure state.memory.authorsNote is blank and ready.
@@ -1021,7 +1026,6 @@ const modifier = (text) => {
             // Ensure state.memory.frontMemory is blank and ready.
             state.memory.frontMemory = "";
         }
-
         delphicBase(false);
 
         const game = new Game(state.game);
