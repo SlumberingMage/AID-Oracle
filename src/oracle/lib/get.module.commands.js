@@ -20,7 +20,7 @@ const commandStart = (who, module) => `\n> ${who} /oracle\s+/${module} /`
  */
 const getArguments = (input, module, who) => {
 
-// Test regex for input from player- /     (\/)oracle(.*)   captures everything post "/oOracle", still needs capture group for TRY, INVENTORY, ATTACK etc modules and arguments after                                               /
+// Test regex for input from player- /     (\/)oracle(.*)   [(try)(attack)(inventory)]   captures everything post "/oOracle", still needs capture group for TRY, INVENTORY, ATTACK etc modules and arguments after                                               /
     return input.startsWith(commandStart(who, module)) ? input.substring(commandStart(who, module).length - 1, input.length - 2) : null
 }
 
