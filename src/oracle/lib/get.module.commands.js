@@ -1,3 +1,40 @@
+// Draft area for V2 of getModuleCommands
+// Test regex for input from player- /     (\/)oracle(.*)   [(try)(attack)(inventory)]   captures everything post "/oOracle", still needs capture group for TRY, INVENTORY, ATTACK etc modules and arguments after      
+
+
+
+// @param input {string} input from player
+// @param TRY/ATTACK/INVENTORY placeholder trio of known "Oracle Commands", format from player should match: /Oracle [ATTACK] [TARGET] [ADDITIONAL MODIFIERS]
+// Future to-do: cut string before "/Oracle" input and feed to AID
+const commandParser(input){
+
+            if(input.match /(\/)oracle(.*)/
+
+                // flavorInput to be fed to AID, "I do XYZ yadda yadda, /Oracle..." becomes flavor + oracle inputs
+                flavorInput = input.slice [BEFORE ORACLE- /(.*)(\/)oracle/   ? ]
+
+                // oracleInput to be fed to MPAI
+                oracleInput = input.slice(/(\/)oracle(.*)/)
+                    if Oracle + TRY/ATTACK/INVENTORY{    
+                        case TRY {}
+                        case ATTACK {}
+                        case INVENTORY {} 
+            }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
 // Module contains functions to get the module commands from the input string.
 // It has a requirement for an object in the final script.
 // Do not test the object, only the functions.
@@ -20,7 +57,7 @@ const commandStart = (who, module) => `\n> ${who} /oracle\s+/${module} /`
  */
 const getArguments = (input, module, who) => {
 
-// Test regex for input from player- /     (\/)oracle(.*)   [(try)(attack)(inventory)]   captures everything post "/oOracle", still needs capture group for TRY, INVENTORY, ATTACK etc modules and arguments after                                               /
+                                         /
     return input.startsWith(commandStart(who, module)) ? input.substring(commandStart(who, module).length - 1, input.length - 2) : null
 }
 
