@@ -12,19 +12,21 @@ const commandParser(input){
 
                 // flavorInput to be fed to AID, "I do XYZ yadda yadda, /Oracle..." becomes flavor + oracle inputs
                         // Cuts input into before the Oracle match
-                flavorInput = input.match(/(.*)(\/)oracle/)
+                flavorInput = input.match(/(.*)(?:\/)oracle/)
+                        // send flavorInput to AID and prepend AID response to MPAI response to Oracle Command
+                        POST flavorInput;
 
                 // oracleInput to be fed to MPAI
-                oracleInput = input.match(/(\/)oracle(.*)/)
+                oracleInput = input.match(/(?:\/)oracle(.*)/)
                         // breaks post-/Oracle string into array of words broken up by space, checks second words in string for predetermined Oracle Commands, eg TRY/ATTACK/INVENTORY
                         commandInput = oracleInput.split(' ')
                         switch(commandInput[1]){
                                     case TRY:
-                                    break
+                                    break;
                                     case ATTACK:
-                                    break
+                                    break;
                                     case INVENTORY: 
-                                    break
+                                    break;
                         }
 
 
