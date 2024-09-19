@@ -8,21 +8,27 @@
 // Future to-do: cut string before "/Oracle" input and feed to AID
 const commandParser(input){
 
-            if(input.match /(\/)oracle(.*)/
+            if(input.match(/(\/)oracle/)){
 
                 // flavorInput to be fed to AID, "I do XYZ yadda yadda, /Oracle..." becomes flavor + oracle inputs
-                flavorInput = input.slice [BEFORE ORACLE- /(.*)(\/)oracle/   ? ]
+                        // Cuts input into before the Oracle match
+                flavorInput = input.match(/(.*)(\/)oracle/)
 
                 // oracleInput to be fed to MPAI
-                oracleInput = input.slice(/(\/)oracle(.*)/)
-                    if Oracle + TRY/ATTACK/INVENTORY{    
-                        case TRY {}
-                        case ATTACK {}
-                        case INVENTORY {} 
+                oracleInput = input.match(/(\/)oracle(.*)/)
+                        // breaks post-/Oracle string into array of words broken up by space, checks second words in string for predetermined Oracle Commands, eg TRY/ATTACK/INVENTORY
+                        commandInput = oracleInput.split(' ')
+                        switch(commandInput[1]){
+                                    case TRY:
+                                    break
+                                    case ATTACK:
+                                    break
+                                    case INVENTORY: 
+                                    break
+                        }
+
+
             }
-
-
-
 
 
 }
