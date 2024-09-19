@@ -6,29 +6,33 @@
 // @param input {string} input from player
 // @param TRY/ATTACK/INVENTORY placeholder trio of known "Oracle Commands", format from player should match: /Oracle [ATTACK] [TARGET] [ADDITIONAL MODIFIERS]
 // Future to-do: cut string before "/Oracle" input and feed to AID
-const commandParser(input){
+const commandParser(text){
 
-            if(input.match(/(\/)oracle/)){
+            if(text.match(/(\/)oracle/)){
 
                 // flavorInput to be fed to AID, "I do XYZ yadda yadda, /Oracle..." becomes flavor + oracle inputs
+                        
                         // Cuts input into before the Oracle match
-                flavorInput = input.match(/(.*)(?:\/)oracle/)
-                        // send flavorInput to AID and prepend AID response to MPAI response to Oracle Command
-                        POST flavorInput;
+                flavorInput = text.match(/(.*)(?:\/oracle)/)
+                        
+                        // send flavorInput to AID, todo prepend AID response to MPAI response to Oracle Command
+                       return { text: flavorInput }
 
-                // oracleInput to be fed to MPAI
-                oracleInput = input.match(/(?:\/)oracle(.*)/)
-                        // breaks post-/Oracle string into array of words broken up by space, checks second words in string for predetermined Oracle Commands, eg TRY/ATTACK/INVENTORY
+                // oracleInput is commands for Oracle from player, needs to be fed to MPAI/routed back to player if invalid
+                oracleInput = text.match(/(?:\/oracle)(.*)/)
+                        
+                        // breaks post-/Oracle string into array of words broken up by space, checks first word in string for predetermined Oracle Commands, eg TRY/ATTACK/INVENTORY
                         commandInput = oracleInput.split(' ')
-                        switch(commandInput[1]){
+                        switch(commandInput[0]){
                                     case TRY:
                                     break;
                                     case ATTACK:
                                     break;
                                     case INVENTORY: 
                                     break;
-                        }
-
+                                    default:
+                                    break;
+                                    // commandInput[1] = Target/Conditional? eg ATTACK DRAGON or TRY DODGING 
 
             }
 
