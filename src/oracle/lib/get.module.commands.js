@@ -25,12 +25,16 @@ const commandParser(text){
                         commandInput = oracleInput.split(' ')
                         switch(commandInput[0]){
                                     case TRY:
+                                                console.log ("TRY command entered.")
                                     break;
                                     case ATTACK:
+                                                console.log ("ATTACK command entered.")
                                     break;
                                     case INVENTORY: 
+                                                console.log ("ATTACK command entered.")
                                     break;
-                                    default:
+                                    default: 
+                                                console.log ("No or unknown command entered, or format invalid.")
                                     break;
                                     // commandInput[1] = Target/Conditional? eg ATTACK DRAGON or TRY DODGING 
 
