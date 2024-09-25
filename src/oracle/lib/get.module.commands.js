@@ -6,6 +6,8 @@
 // @param input {string} input from player
 // @param TRY/ATTACK/INVENTORY placeholder trio of known "Oracle Commands", format from player should match: /Oracle [ATTACK] [TARGET] [ADDITIONAL MODIFIERS]
 // Future to-do: cut string before "/Oracle" input and feed to AID
+
+// code from if(text.match on can be copy-pasted into OnInput portion of AID scripting backend
 const commandParser(text){
 
             if(text.match(/(\/)oracle/)){
@@ -39,8 +41,9 @@ const commandParser(text){
             }
 
                // send flavorInput to AID, todo prepend AID response to MPAI response to Oracle Command
-                       return { text: flavorInput }
                         console.log("Flavor text sent to AID")
+                       return { text: flavorInput }
+                        
 
 }
 
