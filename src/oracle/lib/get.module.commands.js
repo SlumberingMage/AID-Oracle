@@ -12,12 +12,10 @@ const commandParser(text){
 
                 // flavorInput to be fed to AID, "I do XYZ yadda yadda, /Oracle..." becomes flavor + oracle inputs
                         
-                        // Cuts input into before the Oracle match
+                        // flavorInput is adventure actions from the player to be given to the AID, eg "I walk into the cave. /Oracle how do I check my inventory" -> flavorInput = "I walk into the cave."
                 flavorInput = text.match(/(.*)(?:\/oracle)/)
                         
-                        // send flavorInput to AID, todo prepend AID response to MPAI response to Oracle Command
-                       return { text: flavorInput }
-
+                     
                 // oracleInput is commands for Oracle from player, needs to be fed to MPAI/routed back to player if invalid
                 oracleInput = text.match(/(?:\/oracle)(.*)/)
                         
@@ -40,6 +38,9 @@ const commandParser(text){
 
             }
 
+               // send flavorInput to AID, todo prepend AID response to MPAI response to Oracle Command
+                       return { text: flavorInput }
+                        console.log("Flavor text sent to AID")
 
 }
 
