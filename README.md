@@ -10,38 +10,29 @@ A game engine for AI Dungeon.
 
 - [Download](https://raw.githubusercontent.com/SlumberingMage/AID-Oracle/main/distribution/output-format-paragraph.js) Output Fix.
 
-Quick fix for website scripting page.
-```js
-(e=>e[e.length-1])(document.querySelectorAll('[role=alertdialog]')).lastChild.style.flexGrow = 1
-```
+### Command Structure for Skills
 
-```js
-javascript:(function((e=>e[e.length-1])(document.querySelectorAll('[role=alertdialog]')).lastChild.style.flexGrow = 1){})();
-```
+'> {Player} {try|tries|attempt|attempts} to use {action}.'
 
-Command Structure:
-`> {Name} while, trying to be {nice|mean|ect.} attempts to use {skill} for {outcome}`
+I.E.
+'> You try to use fighting to defend yourself.'
+'> You try to use first aid to heal yourself.'
+'> Bob tries to use scavenging to find resources.'
+'> Alice tries to move the rock.'
 
-```css
-/* Fix for script window.*/
-[role="alertdialog"]:last-of-type > :last-child {
-  flex-grow: 1;
-}
+### Command Structure for Charisma
 
-[role="alertdialog"] {
-  overflow: hidden;
-}
-/* Change Modal size */
-[aria-describedby|="description"] {
-  height: 100vh !important;
-  width: 80vw !important;
-}
-[aria-describedby|="description"]:last-of-type > :last-child > * {
-  max-height: calc(100vh - 121px) !important;
-  height: calc(100vh - 121px) !important;
-}
-[aria-describedby|="description"] > div:last-child > div > div > div > div > div > div:last-child {
-  padding-bottom: 0px !important;
-  padding-right: 0px !important:
-}
-```
+'> {Player} {try|tries|attempt|attempts} to use {say|says}.'
+
+I.E.
+'> You try to say, "Can I get a discount?'
+
+Action System: Oracle v3 comes equipped with predefined actions such as speaking, fighting, scavenging, stealth, resistance (a mutant power), and first aid. Each action includes success rates, specific phrases for success and failure, and a cooldown mechanism.
+
+Dynamic Action Rates: The success rates of actions can adjust dynamically based on previous outcomes. This includes modifications for success rates, cooldown periods, and thresholds for failures.
+Exhaustion System: The game tracks the player's level of exhaustion, which is influenced by the number of active and inactive turns. Excessive activity or inactivity leads to exhaustion, affecting the player's status in the game.
+
+Threat System: This system monitors the player’s activity and generates random threats when activity levels drop below a certain threshold, enhancing the game's sense of danger.
+Status and Cooldown Tracking: Oracle v3 maintains a log of the player's current status and any actions that are on cooldown, including the number of turns until they become available again.
+
+Customization: Nearly all aspects of the system are customizable. Users can enable or disable various modules and tailor the unified Action System to create, modify, or replace actions as desired.
