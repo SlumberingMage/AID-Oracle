@@ -15,17 +15,17 @@ A game engine for AI Dungeon.
 '> {Player} {try|tries|attempt|attempts} to use {action}.'
 
 I.E.
-'> You try to use fighting to defend yourself.'
-'> You try to use first aid to heal yourself.'
-'> Bob tries to use scavenging to find resources.'
-'> Alice tries to move the rock.'
+- '> You try to use fighting to defend yourself.'
+- '> You try to use first aid to heal yourself.'
+- '> Bob tries to use scavenging to find resources.'
+- '> Alice tries to move the rock.'
 
 ### Command Structure for Charisma
 
 '> {Player} {try|tries|attempt|attempts} to use {say|says}.'
 
 I.E.
-'> You try to say, "Can I get a discount?'
+- '> You try to say, "Can I get a discount?'
 
 Action System: Oracle v3 comes equipped with predefined actions such as speaking, fighting, scavenging, stealth, resistance (a mutant power), and first aid. Each action includes success rates, specific phrases for success and failure, and a cooldown mechanism.
 
