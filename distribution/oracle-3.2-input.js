@@ -845,7 +845,14 @@ const modifier = (text) => {
             // The outcomes for the threat system when the player is inactive.
             // Add as many as you like but keep one in the array.
             // The system randomly selects one of the outcomes for the player inaction.
-            array: ["A strange noise can he heard.", "There is a strange smell in the air.", "There is sudden silence."],
+            array: [
+                "A text message pops up.",
+                "A strange noise is heard.",
+                "You notice something new about the person you are with.",
+                "Someone approaches.",
+                "A voice is heard.",
+                "You receive a text message with a photo."
+                ],
         },
         // The event system for the player.
         // This is used to add random events to the player.
@@ -1243,7 +1250,12 @@ const modifier = (text) => {
          * @returns The random item from the active players threat array.
          */
         const suddenly = () => {
+            //console.log(`Threat Enabled: ${activePlayer.threat.enabled}, Inactive: ${activePlayer.threat.inactive}, Threshold: ${activePlayer.threat.threshold}`);
             if (!activePlayer.threat.enabled && !(activePlayer.threat.inactive > activePlayer.threat.threshold)) return "";
+            
+            // Update the threat array with any new items from the default threat array
+            updateThreatArray(activePlayer, defaultPlayerYou);
+
             return getRandomItem(activePlayer.threat.array);
         }
 
