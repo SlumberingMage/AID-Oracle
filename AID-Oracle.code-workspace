@@ -5,5 +5,7 @@
 		}
 	],
 	"settings": {
+		"ollama-autopilot.general.autopilotEnabled": true,
+		"ollama-autopilot.model.modelName": "huihui_ai/dolphin3-abliterated"
 	}
 }

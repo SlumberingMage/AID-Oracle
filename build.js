@@ -15,7 +15,7 @@ require('esbuild')
     },
     bundle: false,
     outdir: 'dist',
-    platform: 'browser',
+    platform: 'node',
     minify: false,
     sourcemap: false
   })
